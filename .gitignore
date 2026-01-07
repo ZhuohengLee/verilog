@@ -1,0 +1,32 @@
+# =======================================================
+# .gitignore for Verilog Course
+# =======================================================
+
+# --- Icarus Verilog & Simulation Artifacts ---
+# Compiled executables
+*.out
+*.vvp
+a.out
+
+# Waveform dump files
+*.vcd
+*.fst
+*.lxt
+
+# --- Operating System Files ---
+# Mac OS
+.DS_Store
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# --- FPGA Tool Generated Files (Optional for later) ---
+*.log
+*.jou
+*.pb
+*.wdb
+.Xil/
+xsim.dir/
+incremental_db/
+db/
