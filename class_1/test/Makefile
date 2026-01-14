@@ -1,7 +1,3 @@
-# ==========================================
-# MIPS CPU Course - Week 1 Makefile Template
-# ==========================================
-
 # 1. Define file name variables (Modify these to match your filenames)
 SRC = test.v
 TB  = test_tb.v
