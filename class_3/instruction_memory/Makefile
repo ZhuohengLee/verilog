@@ -1,10 +1,10 @@
-# 1. Define file name variables (Updated for Instruction Memory)
+# 1. Define file name variables
 SRC = instruction_memory.v
 TB  = instruction_memory_tb.v
 
 # Define output file names
 OUT = imem_wave.out
-# 注意：这里的 VCD 名字必须和 instruction_memory_tb.v 里 $dumpfile("instr_mem.vcd") 保持一致
+# Note: The VCD name must match $dumpfile("instr_mem.vcd") in the testbench
 VCD = instr_mem.vcd
 
 # 2. Default Target
