@@ -1,5 +1,9 @@
 # MIPS CPU Design Course - Verilog Teaching Materials
 
+> **Hanyang University ERICA Campus | Department of Robotics**  
+> **Computer Architecture Course**  
+> **Instructor: Prof. Bumjin Jang**
+
 A progressive 15-week MIPS CPU design course, teaching students how to build a complete pipelined processor from scratch using Verilog HDL.
 
 ## 📋 Course Overview
