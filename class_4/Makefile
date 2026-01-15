@@ -1,5 +1,4 @@
 # Note: We must compile 3 source files here
-# (Make sure instruction_memory.v is in the same folder)
 SRC = if_stage.v pc.v instruction_memory.v
 TB  = if_stage_tb.v
 
