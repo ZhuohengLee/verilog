@@ -41,6 +41,7 @@ module mips (
         .alu_ctrl(alu_ctrl),       // Connected to Control Unit
         .mem_write_en(mem_write),  // Connected to Control Unit
         .mem_to_reg(mem_to_reg),   // Connected to Control Unit
+        .branch(branch),           // Branch signal from Control Unit
         .pc_out(pc_out),
         .alu_result(alu_result),
         .instr_out(instr)          // Feedback instruction to Control Unit
