@@ -58,7 +58,6 @@ make clean  # Clean generated files
 
 - **Progressive Learning**: Each week builds on previous concepts
 - **Complete Testbenches**: Every module includes simulation testbench
-- **Real Hardware Ready**: Final design supports FPGA deployment
 - **MMIO Support**: GPIO interface for switches and LEDs
 
 ## 📝 License
