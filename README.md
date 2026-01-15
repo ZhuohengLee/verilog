@@ -41,7 +41,7 @@ Week 12-15: I/O & Advanced Features
 ## 🚀 Getting Started
 
 ### Prerequisites
-- [Icarus Verilog](http://iverilog.icarus.com/) (iverilog)
+- [Icarus Verilog](https://bleyer.org/icarus/) (iverilog)
 - [GTKWave](http://gtkwave.sourceforge.net/) (optional, for waveform viewing)
 
 ### Using Makefiles
