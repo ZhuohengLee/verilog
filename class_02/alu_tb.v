@@ -32,7 +32,7 @@ module alu_tb;
         else $display("ADD Passed");
 
         // Test 2: SUB (30 - 30) & Zero Flag
-        src_a = 12; src_b = 30; alu_ctrl = 3'b110;
+        src_a = 30; src_b = 30; alu_ctrl = 3'b110;
         #10;
         if (result !== 0 || zero !== 1) $error("SUB/Zero Failed");
         else $display("SUB/Zero Passed");
