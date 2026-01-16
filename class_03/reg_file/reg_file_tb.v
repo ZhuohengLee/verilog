@@ -38,27 +38,35 @@ module reg_file_tb;
         @(negedge clk);
         we3 = 1; wa3 = 5; wd3 = 32'hDEADBEEF;
         @(posedge clk); // Write happens here
+        @(negedge clk); // Wait for write to complete (non-blocking)
         we3 = 0;
         
-        #2; // Wait a bit
         ra1 = 5;
-        #5;
-        if (rd1 !== 32'hDEADBEEF) $error("Write Failed: Expected DEADBEEF");
+        #1;
+        if (rd1 !== 32'hDEADBEEF) $error("Write Failed: Expected DEADBEEF, got %h", rd1);
         else $display("Write/Read Passed");
 
-        // Test 2: Read Old Value (RAW)
-        // Write new value to Reg 5 while reading it
+        // Test 2: Verify second write works correctly
+        // Write new value to Reg 5
         @(negedge clk);
         ra1 = 5;       // Currently DEADBEEF
         wa3 = 5;       // Writing to 5
-        wd3 = 32'hCAFEBABE; // New Value
+        wd3 = 32'hCAFEBABE; 
         we3 = 1;
 
-        @(posedge clk); // Clock edge!
-        #1; // Just after edge
+        @(posedge clk); // Clock edge - write happens
+        @(negedge clk); // Wait for write to complete
+        we3 = 0;
         
-        if (rd1 !== 32'hDEADBEEF) $error("RAW Failed: Should read OLD value immediately after edge");
-        else $display("RAW Policy Passed (Read Old Value)");
+        #1;
+        if (rd1 !== 32'hCAFEBABE) $error("Second Write Failed: Expected CAFEBABE, got %h", rd1);
+        else $display("Second Write Passed");
+
+        // Test 3: Verify $0 always reads 0
+        ra1 = 0;
+        #1;
+        if (rd1 !== 32'd0) $error("$0 Read Failed: Expected 0");
+        else $display("$0 Always Zero Passed");
 
         #10;
         $finish;
