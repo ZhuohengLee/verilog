@@ -2,12 +2,9 @@
 module mips_tb;
     reg clk, rst_n;
     wire [31:0] pc_out, alu_result;
-
     mips uut (.clk(clk), .rst_n(rst_n), .pc_out(pc_out), .alu_result(alu_result));
-
     initial begin clk = 0; forever #5 clk = ~clk; end
     initial begin $dumpfile("branch.vcd"); $dumpvars(0, mips_tb); end
-
     initial begin
         rst_n = 0; #10; rst_n = 1;
         $display("--- ID Branch Simulation Start ---");

@@ -1,50 +1,55 @@
 `timescale 1ns / 1ps
+//==============================================================================
+// Week 7: Pipeline Integration - Top-level MIPS Module
+// Focus: Orchestrating Control Signal Propagation
+//
+// In this stage, the Control Unit generates signals in the Decode (D) stage.
+// The Pipelined Datapath is responsible for carrying these signals forward
+// so they synchronize with the instruction as it matures.
+//==============================================================================
 
 module mips (
     input  wire        clk,
     input  wire        rst_n,
-    output wire [31:0] pc_out,
-    output wire [31:0] alu_result
+    output wire [31:0] pc_out,          // Current PC for debug
+    output wire [31:0] alu_result       // Final result for debug
 );
 
-    // Wires connecting Control Unit and Datapath
-    wire       mem_to_reg;
-    wire       mem_write;
-    wire       branch;
-    wire       alu_src;
-    wire       reg_dst;
-    wire       reg_write;
-    wire [2:0] alu_ctrl;
-    wire [31:0] instr;
+    // Instruction from Decode stage (for Control Unit)
+    wire [31:0] instr_D;
 
-    // 1. Instantiate Control Unit
+    // Control signals (generated in Decode stage, propagated through pipeline)
+    wire       reg_write_D, mem_to_reg_D, mem_write_D, branch_D;
+    wire       alu_src_D, reg_dst_D;
+    wire [2:0] alu_ctrl_D;
+
+    // Control Unit
     control_unit u_control (
-        .opcode(instr[31:26]),
-        .funct(instr[5:0]),
-        .mem_to_reg(mem_to_reg),
-        .mem_write(mem_write),
-        .branch(branch),
-        .alu_src(alu_src),
-        .reg_dst(reg_dst),
-        .reg_write(reg_write),
-        .alu_ctrl(alu_ctrl)
+        .opcode(instr_D[31:26]),
+        .funct(instr_D[5:0]),
+        .mem_to_reg(mem_to_reg_D),
+        .mem_write(mem_write_D),
+        .branch(branch_D),
+        .alu_src(alu_src_D),
+        .reg_dst(reg_dst_D),
+        .reg_write(reg_write_D),
+        .alu_ctrl(alu_ctrl_D)
     );
 
-    // 2. Instantiate Datapath
-    // Note: Make sure your datapath.v has 'instr_out' port!
+    // Pipelined Datapath
     datapath u_datapath (
         .clk(clk),
         .rst_n(rst_n),
-        .reg_write_en(reg_write),  // Connected to Control Unit
-        .reg_dst(reg_dst),         // Connected to Control Unit
-        .alu_src(alu_src),         // Connected to Control Unit
-        .alu_ctrl(alu_ctrl),       // Connected to Control Unit
-        .mem_write_en(mem_write),  // Connected to Control Unit
-        .mem_to_reg(mem_to_reg),   // Connected to Control Unit
-        .branch(branch),           // Connected to Control Unit
+        .reg_write_D(reg_write_D),
+        .mem_to_reg_D(mem_to_reg_D),
+        .mem_write_D(mem_write_D),
+        .alu_ctrl_D(alu_ctrl_D),
+        .alu_src_D(alu_src_D),
+        .reg_dst_D(reg_dst_D),
+        .branch_D(branch_D),
+        .instr_D(instr_D),
         .pc_out(pc_out),
-        .alu_result(alu_result),
-        .instr_out(instr)          // Feedback instruction to Control Unit
+        .alu_result_out(alu_result)
     );
 
-endmodule               
+endmodule

@@ -1,10 +1,10 @@
 # 1. Define file name variables
-SRC = alu.v
-TB  = alu_tb.v
+SRC = reg_file.v
+TB  = reg_file_tb.v
 
 # Define output file names
-OUT = wave.out
-VCD = alu.vcd
+OUT = regfile_wave.out
+VCD = reg_file.vcd
 
 # 2. Default Target
 all: compile run

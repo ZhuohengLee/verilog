@@ -1,18 +1,21 @@
 `timescale 1ns / 1ps
+//==============================================================================
+// Week 7: Program Counter Register
+// Simple version for basic pipeline structure (Stall/Forwarding comes later)
+//==============================================================================
 
 module pc (
     input  wire        clk,
     input  wire        rst_n,
-    input  wire [31:0] pc_next,  // Address of the next instruction
-    output reg  [31:0] pc        // Current PC address
+    input  wire [31:0] pc_next,
+    output reg  [31:0] pc
 );
 
     always @(posedge clk or negedge rst_n) begin
-        if (!rst_n) begin
-            pc <= 32'd0; // On reset, start from address 0
-        end else begin
-            pc <= pc_next; // On clock edge, update to next address
-        end
+        if (!rst_n)
+            pc <= 32'b0;
+        else
+            pc <= pc_next;
     end
 
 endmodule

@@ -1,26 +1,16 @@
 `timescale 1ns / 1ps
-
 module instruction_memory #(
-    parameter WIDTH = 32,
-    parameter DEPTH = 256  // Simulate a memory space of 256 words
+    parameter WIDTH = 32,          // instruction width
+    parameter DEPTH = 256          // memory depth (number of instructions)
 )(
-    input  wire [31:0] addr, // PC input address (e.g., 0, 4, 8...)
-    output wire [31:0] rd    // Read Data (The fetched instruction)
+    input  wire [31:0] addr,       // instruction address (byte address)
+    output wire [31:0] rd          // instruction data output
 );
-
-    // 1. Define memory array
-    reg [WIDTH-1:0] ram [0:DEPTH-1];
-
-    // 2. Initialization: Load machine code file
-    initial begin
-        // "memfile.dat" must be in the same directory
-        // $readmemh reads hexadecimal data into the array
-        $readmemh("memfile.dat", ram);
+    reg [WIDTH-1:0] ram [0:DEPTH-1]; // internal memory array
+    
+    initial begin                  // initialize memory
+        $readmemh("memfile.dat", ram);  // load program from hex file
     end
-
-    // 3. Read Logic (Combinational)
-    // MIPS memory is word-aligned. Address 4 corresponds to array index 1.
-    // We use addr[31:2] to convert byte address to word index.
-    assign rd = ram[addr[31:2]];
-
+    
+    assign rd = ram[addr[31:2]];   // word aligned read (divide address by 4)
 endmodule

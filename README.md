@@ -1,69 +1,73 @@
-# MIPS CPU Design Course - Verilog Teaching Materials
+# Computer Architecture Course
 
 > **Hanyang University ERICA Campus | Department of Robotics**  
 > **Computer Architecture Course**  
 > **Instructor: Prof. Bumjin Jang**
 
-A progressive 15-week MIPS CPU design course, teaching students how to build a complete pipelined processor from scratch using Verilog HDL.
+A 13-week project-based learning course: Build a 5-stage pipelined MIPS CPU and use it to control a virtual motor via PWM.
 
-## 📋 Course Overview
+## 📋 Course Syllabus
 
 | Week | Topic | Key Concepts |
 |------|-------|--------------|
-| 01 | Basic Components | Shift Registers, Sequential Logic |
-| 02 | ALU Design | ADD, SUB, SLT Operations |
-| 03 | Memory Units | Register File, Instruction Memory |
-| 04 | IF Stage | Program Counter, Instruction Fetch |
-| 05 | Single-Cycle Datapath | Complete Data Path Integration |
-| 06 | Control Unit | Main Decoder, ALU Decoder |
-| 07 | Complete Single-Cycle | Full MIPS CPU (R/I-type, lw/sw, beq) |
-| 08 | 5-Stage Pipeline | IF/ID/EX/MEM/WB Registers |
-| 09 | Forwarding Unit | Data Hazard Resolution |
-| 10 | Hazard Unit | Load-Use Stalls, Pipeline Control |
-| 11 | Branch Optimization | Early Branch Resolution in ID Stage |
-| 12 | Memory-Mapped I/O | Switches Input, LED Output |
-| 13 | Jump Instructions | j, jal, jr Support |
-| 14 | Performance Analysis | Cycle Counting, Pipeline Efficiency |
-| 15 | Final Demo | Interactive LED Counter Project |
+| 01 | ALU Design | ADD, SUB, AND, OR, SLT |
+| 02 | Register File | Dual-read, Single-write |
+| 03 | Memory & PC | Instruction/Data Memory, PC+4 |
+| 04 | Single-Cycle Datapath | IF/ID/EX/MEM/WB Integration |
+| 05 | Control Unit | Main Decoder, ALU Decoder |
+| 06 | Pipeline Structure | Pipeline Registers |
+| 07 | Pipeline Integration | Signal Propagation |
+| 08 | Data Forwarding | Forwarding Unit |
+| 09 | Stall & Flush | Hazard Detection Unit |
+| 10 | Jump Instructions | j, jal, jr Support |
+| 11 | MMIO & PWM Controller | 10kHz PWM Generator |
+| 12 | Motor Control Simulation | Accel/Decel Algorithm |
+| 13 | Final PBL Demo | Waveform Presentation |
 
-## 🏗️ Architecture Evolution
+## 🏗️ Architecture
 
 ```
-Week 01-04: Individual Components
+Week 01-05: Single-Cycle MIPS CPU
      ↓
-Week 05-07: Single-Cycle MIPS CPU
+Week 06-09: 5-Stage Pipelined CPU
      ↓
-Week 08-11: Pipelined MIPS CPU
+Week 10-11: Jump + PWM I/O
      ↓
-Week 12-15: I/O & Advanced Features
+Week 12-13: Motor Control Application
 ```
 
 ## 🚀 Getting Started
 
 ### Prerequisites
-- [Icarus Verilog](https://bleyer.org/icarus/) (iverilog)
-- [GTKWave](http://gtkwave.sourceforge.net/) (optional, for waveform viewing)
+- [Icarus Verilog](https://bleyer.org/icarus/)
+- [GTKWave](http://gtkwave.sourceforge.net/) (for waveforms)
 
-### Using Makefiles
-Each class includes a Makefile for convenience:
-
+### Quick Start
 ```bash
-cd class_06
+cd class_01
 make        # Compile and run
-make wave   # Open GTKWave
-make clean  # Clean generated files
+make wave   # View waveform
 ```
 
-## 🎯 Key Features
+## 📁 Structure
 
-- **Progressive Learning**: Each week builds on previous concepts
-- **Complete Testbenches**: Every module includes simulation testbench
-- **MMIO Support**: GPIO interface for switches and LEDs
+```
+verilog/
+├── class_01/    # ALU
+├── class_02/    # Register File
+├── class_03/    # Memory + PC
+├── class_04/    # Single-cycle Datapath
+├── class_05/    # Control Unit
+├── class_06/    # Pipeline Structure
+├── class_07/    # Pipeline Integration
+├── class_08/    # Forwarding
+├── class_09/    # Hazard Unit
+├── class_10/    # Jump Instructions
+├── class_11/    # PWM Controller
+├── class_12/    # Motor Control
+└── class_13/    # Final Demo
+```
 
 ## 📝 License
 
-This project is for educational purposes.
-
-## 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit issues or pull requests.
+Educational use only.
